@@ -1,0 +1,65 @@
+-- Ballon d'Or 2025 Top 10 Analysis
+-- Author: [Your Name]
+-- Date: October 2025
+-- Description: PostgreSQL queries to create and analyze a table of top 10 Ballon d'Or 2025 candidates.
+-- Used for PowerBI dashboards, Pandas data processing, and Matplotlib visualizations.
+
+-- Create table for Ballon d'Or 2025 top 10 candidates
+-- Columns: Rank, Name, Goal, Assist, GA (Goals + Assists), Club
+CREATE TABLE ballon_dor_205 (
+    Rank INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Goal INT,
+    Assist INT, 
+    GA INT,
+    Club VARCHAR(120)
+);
+
+-- Insert data for top 10 players
+INSERT INTO ballon_dor_205 (Rank, Name, Goal, Assist, GA, Club) 
+VALUES 
+    (1, 'Ousmane Dembele', 37, 16, 53, 'Paris Saint Germain'),
+    (2, 'Lamine Yamal', 21, 26, 47, 'FC Barcelona'),
+    (3, 'Vitinha', 8, 8, 16, 'Paris Saint Germain'),
+    (4, 'Raphinha', 39, 25, 64, 'FC Barcelona'),
+    (5, 'Mohammed Salah', 36, 24, 60, 'Liverpool FC'),
+    (6, 'Kylian Mbappe', 46, 7, 53, 'Real Madrid'),
+    (7, 'Achraf Hakimi', 13, 13, 26, 'Paris Saint Germain'),
+    (8, 'Desire Duoe', 16, 16, 32, 'Paris Saint Germain'),
+    (9, 'Kvicha Kvaratshkelia', 15, 15, 30, 'Paris Saint Germain'),
+    (10, 'Nunu Mendes', 7, 12, 19, 'Paris Saint Germain');
+
+-- Queries for data analysis and visualization
+-- Full table for initial exploration
+SELECT * FROM ballon_dor_205;
+
+-- Sort by Goals + Assists (GA) for ranking analysis (used in PowerBI)
+SELECT * FROM ballon_dor_205 ORDER BY GA DESC;
+
+-- Filter by club for club-specific analysis
+-- FC Barcelona players for Matplotlib bar chart
+SELECT * FROM ballon_dor_205 WHERE club = 'FC Barcelona';
+
+-- Paris Saint Germain players for Matplotlib bar chart
+SELECT * FROM ballon_dor_205 WHERE club = 'Paris Saint Germain';
+
+-- Liverpool FC players for reference
+SELECT * FROM ballon_dor_205 WHERE club = 'Liverpool FC';
+
+-- Sort by Assists for assist-focused visualization
+SELECT * FROM ballon_dor_205 ORDER BY Assist DESC;
+
+-- Sort by Goals for goal-scoring analysis (used in Pandas)
+SELECT * FROM ballon_dor_205 ORDER BY Goal DESC;
+
+-- Count PSG players in top 10 for summary stats
+SELECT COUNT(*) AS psg_player_count FROM ballon_dor_205 WHERE club = 'Paris Saint Germain';
+
+-- Players with GA > 50 for high-impact analysis
+SELECT Name FROM ballon_dor_205 WHERE GA > 50;
+
+-- Players with GA > 60 for elite performers (used in PowerBI)
+SELECT Name FROM ballon_dor_205 WHERE GA > 60;
+
+-- Detailed stats for elite performers (GA > 60)
+SELECT Name, Goal, Assist FROM ballon_dor_205 WHERE GA > 60;
