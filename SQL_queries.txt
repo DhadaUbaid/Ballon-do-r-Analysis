@@ -1,8 +1,4 @@
 -- Ballon d'Or 2025 Top 10 Analysis
--- Author: [Your Name]
--- Date: October 2025
--- Description: PostgreSQL queries to create and analyze a table of top 10 Ballon d'Or 2025 candidates.
--- Used for PowerBI dashboards, Pandas data processing, and Matplotlib visualizations.
 
 -- Create table for Ballon d'Or 2025 top 10 candidates
 -- Columns: Rank, Name, Goal, Assist, GA (Goals + Assists), Club
@@ -37,29 +33,30 @@ SELECT * FROM ballon_dor_205;
 SELECT * FROM ballon_dor_205 ORDER BY GA DESC;
 
 -- Filter by club for club-specific analysis
--- FC Barcelona players for Matplotlib bar chart
+-- FC Barcelona players 
 SELECT * FROM ballon_dor_205 WHERE club = 'FC Barcelona';
 
--- Paris Saint Germain players for Matplotlib bar chart
+-- Paris Saint Germain players 
 SELECT * FROM ballon_dor_205 WHERE club = 'Paris Saint Germain';
 
--- Liverpool FC players for reference
+-- Liverpool FC players 
 SELECT * FROM ballon_dor_205 WHERE club = 'Liverpool FC';
 
--- Sort by Assists for assist-focused visualization
+-- Sort by Assists for 
 SELECT * FROM ballon_dor_205 ORDER BY Assist DESC;
 
--- Sort by Goals for goal-scoring analysis (used in Pandas)
+-- Sort by Goals for goal-scoring 
 SELECT * FROM ballon_dor_205 ORDER BY Goal DESC;
 
--- Count PSG players in top 10 for summary stats
+-- Count PSG players 
 SELECT COUNT(*) AS psg_player_count FROM ballon_dor_205 WHERE club = 'Paris Saint Germain';
 
--- Players with GA > 50 for high-impact analysis
+-- Players with GA > 50 
 SELECT Name FROM ballon_dor_205 WHERE GA > 50;
 
--- Players with GA > 60 for elite performers (used in PowerBI)
+-- Players with GA > 60 
 SELECT Name FROM ballon_dor_205 WHERE GA > 60;
 
 -- Detailed stats for elite performers (GA > 60)
+
 SELECT Name, Goal, Assist FROM ballon_dor_205 WHERE GA > 60;
